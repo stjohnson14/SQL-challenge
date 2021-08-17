@@ -66,6 +66,28 @@ Where first_name = 'Hercules' and last_name like 'B%'
 
 -- list all employees in sales, emp_no, last, first, dept name
 
+select info.emp_no, info.first_name, info.last_name, d.dept_name
+from employees_info as info
+inner join employees_dept as ed on info.emp_no = ed.emp_no
+inner join departments as d on ed.dept_no = d.dept_no
+where d.dept_name = 'Sales'
+
 -- list all employees in sales and development, emp no, last, first, dept name
 
+select info.emp_no, info.first_name, info.last_name, d.dept_name
+from employees_info as info
+inner join employees_dept as ed 
+on (info.emp_no = ed.emp_no)
+inner join departments as d on 
+(ed.dept_no = d.dept_no)
+where d.dept_name = 'Sales'
+OR 
+d.dept_name = 'Development'
+
 -- in descending order, list frequency count of employee last names ie how many employees share each last name
+
+select last_name, count(last_name) as Frequency
+from employees_info
+group by last_name
+ORDER BY COUNT(last_name) DESC
+
